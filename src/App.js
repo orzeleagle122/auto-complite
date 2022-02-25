@@ -28,13 +28,13 @@ function App() {
     return (
         <div className="App">
             <input
-                list="places"
+                list="users"
                 value={inputValue}
                 onChange={handleChange}
                 placeholder={`Search users...`}
                 autoComplete="off"
             />
-            <datalist id="places">
+            <datalist id="users">
                 {filteredUsers.map((user) => (
                     <option key={user.id}>{user.name}</option>
                 ))}
