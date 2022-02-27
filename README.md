@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+1. Please write a function that shows the usage of closures
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+const closures=()=>{
+    const city="Rzeszow";
+    const displayCity=()=>{
+    alert(city);
+    }
+return displayCity;
+}
+closures();
+```
 
-## Available Scripts
+2. Please write a function that returns a sum of array items // example input [9, 1, 22, 0, 2]
+   // example output 34
 
-In the project directory, you can run:
+```
+const sumArray = (arr) => arr.reduce((prev, curr) => prev + curr, 0);
+```
 
-### `npm start`
+// 3. Please write a recursive function that flattens a list of items // example input [[2, [4, [44,5,6]]], [4,5,6]
+, [[2,4], 4], 5]]
+// example output [2, 4, 44, 5, 6, 4, 5, 6, 2, 4, 4, 5]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+const flattArray = (arr1) => arr1.reduce((acc, val) => Array.isArray(val) ? acc.concat(flattArray(val)) : acc.concat(val), []);
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+// 4. Please write a function that finds all common elements of two arrays(only primitive types as array elements, order
+doesn't matter)
+// example inputs ['b', 3, 4, 76, 'c'], ['a', 'b', 4, 76, 21, 'e']
+// example output ['b', 4, 76]
 
-### `npm test`
+```
+const findCommonElements = (arr1, arr2) => arr1.filter(item => {
+    let index = arr2.indexOf(item);
+    return index !== -1;
+});
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+// 5. Please write a function that finds all different elements of two arrays(only primitive types as array elements,
+order doesn't matter)
+// example inputs ['b', 3, 4, 76, 'c'], ['a', 'b', 4, 76, 21, 'e']
+// example output ['a', 3, 21, 'c', 'e']
 
-### `npm run build`
+```
+const findDifferentElements = (arr1, arr2) => {
+    const uniqueArr1 = arr1.filter(item => arr2.indexOf(item) == -1);
+    const uniqueArr2 = arr2.filter(item => arr1.indexOf(item) == -1);
+    return [...new Set(uniqueArr1.concat(uniqueArr2))];
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+// 6. Please write a function that takes two arrays of items and returns an array of tuples made from two input arrays
+at the same indexes. Excessive items should be dropped. // example input [1,2,3], [4,5,6,7]
+// example output [[1,4], [2,5], [3,6]]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+const tupesArray = (arr1, arr2) => {
+    if (arr1.length <= arr2.length) {
+        return arr1.map((item, index) => {
+            return [item, arr2[index]];
+        })
+    } else {
+        return arr2.map((item, index) => {
+            return [arr1[index], item];
+        })
+    }
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// 7. Please write a function which takes a path(path is an array of keys) and object, then returns value at this path.
+If value at path doesn't exists, return undefined. // example inputs ['a', 'b', 'c', 'd'], { a: { b: { c: { d: '23' } }
+} } // example output '23'
 
-### `npm run eject`
+```
+const pathToObj = (path, obj) => {
+    if (path.length === 0) return obj;
+    return pathToObj(path.slice(1, path.length), obj[path[0]]);
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+// 8. Please write compare function which compares 2 objects for equality. // example input { a: 'b', c: 'd' }, { c: '
+d', a: 'b' } /// output true // example input { a: 'c', c: 'a' }, { c: 'd', a: 'b', q: 's' } /// output false
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+const compareObjects = (obj1, obj2) => {
+    let obj1Keys = Object.keys(obj1).sort();
+    let obj2Keys = Object.keys(obj2).sort();
+    if (obj1Keys.length !== obj2Keys.length) return false;
+    for (let i = 0; i < obj1Keys.length; i++) {
+        if (obj1Keys[i] !== obj2Keys[i] || obj1[obj1Keys[i]] !== obj2[obj2Keys[i]]) return false;
+    }
+    return true;
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+// 9. Please write a function which takes a list of keys and an object, then returns this object, just without keys from
+the list // example input ['color', 'size'], { color: 'Blue', id: '22', size: 'xl' } // example output { id: '22' }
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+const foo = (keys, obj) => {
+    keys.forEach(item => {
+        if (obj.hasOwnProperty(item)) delete obj[item];
+    });
+    return obj;
+}
+```
